@@ -1,7 +1,8 @@
+#include <gtest/gtest.h>
+
 #include "test_boost.h"
 
 using namespace std;
-
 
 void TestObj::runThread1()
 {
@@ -21,7 +22,7 @@ void TestObj::runThread1()
 	return;
 }
 
-void test_thread()
+TEST(test_thread, TestThreadSync)
 {
     TestObj test_obj;
     boost::shared_ptr<int> temp(new int);
@@ -73,7 +74,7 @@ void test_bind()
     dc.run();
 }
 
-void test_xml()
+TEST(test_xml, TestPropertyTree)
 {
     struct _def_account
     {
@@ -111,15 +112,15 @@ void test_xml()
     }
 }
 
-int main(void) {
+int main(int argc, char **argv)
+{
+	std::cout << "ready go to test boost!." << std::endl;
 
-	printf("ready go to test boost!. \n");
+	testing::InitGoogleTest(&argc, argv);
 
-    test_thread();
-	
-    test_xml();
+	RUN_ALL_TESTS();
 
-    system("PAUSE");
+	std::cin.get();
 
 	return EXIT_SUCCESS;
 }
